@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Norma.Plugin</RootNamespace>
+    <AssemblyName>Norma.Plugin</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- AutoCAD loads the DLL via NETLOAD; nothing to run standalone. -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--
+      ══════════════════════════════════════════════════════════════════════
+      PLACEHOLDER — AutoCAD 2024 install path.
+      Point this at your local AutoCAD 2024 installation before building,
+      e.g. C:\Program Files\Autodesk\AutoCAD 2024
+      (see README.md, "Pointing at your AutoCAD install").
+      ══════════════════════════════════════════════════════════════════════
+    -->
+    <AcadInstallDir>PATH\TO\AutoCAD 2024</AcadInstallDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      AutoCAD managed API assemblies. Private=false (Copy Local off) is required:
+      these are resolved from the running AutoCAD process at load time and must
+      never be copied next to the plugin DLL.
+
+      Alternative: replace these three references with the version-matched NuGet
+      reference assemblies (no local install needed to compile):
+        <PackageReference Include="AutoCAD.NET" Version="24.3.0" />
+    -->
+    <Reference Include="acdbmgd">
+      <HintPath>$(AcadInstallDir)\acdbmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="acmgd">
+      <HintPath>$(AcadInstallDir)\acmgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="accoremgd">
+      <HintPath>$(AcadInstallDir)\accoremgd.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Planned (see docs): Linq2Acad-2024 1.0.1 simplifies transaction/container
+      access. NOTE: it pulls in AutoCAD.NET.Core 24.3.x reference assemblies,
+      which supersede the manual references above — add one or the other.
+        <PackageReference Include="Linq2Acad-2024" Version="1.0.1" />
+    -->
+    <ProjectReference Include="..\Norma.Core\Norma.Core.csproj" />
+  </ItemGroup>
+
+</Project>
