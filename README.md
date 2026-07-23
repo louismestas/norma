@@ -100,3 +100,24 @@ as the launch target in VS and NETLOAD from the debug session.
 ## License
 
 [MIT](LICENSE)
+
+## Tools & Extensions
+
+Norma is built primarily in **Visual Studio 2022** (required for build, debug, and NETLOAD into AutoCAD). [Positron](https://positron.posit.co/) is used as a secondary editor for reading and editing. AI assistance is from Claude (Anthropic).
+
+**Toolchain used:**
+- Visual Studio 2022 (primary environment: build, debug, NETLOAD into AutoCAD)
+- .NET Framework 4.8 and C#
+- MathNet.Numerics (SVD) in `Norma.Core`
+- xUnit and the `dotnet` CLI for tests
+- AutoCAD 2024 .NET API (`acdbmgd`, `acmgd`, `accoremgd`)
+- Git and GitHub for version control
+- Claude (Anthropic) for development assistance
+
+**Positron extensions** (for editing in Positron; Visual Studio 2022 remains the primary C# environment). All are published on the Open VSX registry, which is the registry Positron installs from:
+
+| Extension ID | Name | Purpose |
+|---|---|---|
+| `muhammad-sammy.csharp` | C# | C# language support in Positron (the Microsoft C# and C# Dev Kit extensions are not on Open VSX) |
+| `editorconfig.editorconfig` | EditorConfig | Enforcing the repo's formatting conventions |
+| `eamodio.gitlens` | GitLens | Reviewing history on the core algorithm code |
